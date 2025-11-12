@@ -123,7 +123,7 @@
 
 <div class="album-container">
   <div class="album-header">
-    <img src="Purple-Woman.jpg" alt="Album Art" class="album-art">
+    <img src="square-image.jpg" alt="Album Art" class="album-art">
     <div class="album-details">
       <h1 class="album-title">Purple Woman</h1>
       <h2 class="album-artist">0teazy</h2>
@@ -148,7 +148,7 @@
 </div>
 
 <div class="global-player hidden">
-  <img src="Purple-Woman.jpg" alt="Playing Art" class="player-art">
+  <img src="square-image.jpg" alt="Playing Art" class="player-art">
   <div class="player-info">
     <p class="player-title"></p>
     <p class="player-artist"></p>
@@ -204,7 +204,7 @@ function loadTrack(index) {
   audio.src = track.dataset.src;
   playerTitle.textContent = track.dataset.title;
   playerArtist.textContent = track.dataset.artist;
-  playerArt.src = "Purple-Woman.jpg";
+  playerArt.src = "square-image.jpg";
 
   globalPlayer.classList.remove('hidden');
 
@@ -214,7 +214,7 @@ function loadTrack(index) {
       title: track.dataset.title,
       artist: track.dataset.artist,
       album: 'Purple Woman',
-      artwork: [{ src: 'Purple-Woman.jpg', sizes: '512x512', type: 'image/jpeg' }]
+      artwork: [{ src: 'square-image.jpg', sizes: '512x512', type: 'image/jpeg' }]
     });
     navigator.mediaSession.setActionHandler('play', () => audio.play());
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
