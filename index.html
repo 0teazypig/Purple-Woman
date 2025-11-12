@@ -1,311 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Purple Woman Player</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Purple Woman — 0teazy</title>
 <link rel="icon" type="image/png" href="square-image.jpg">
-<!-- Open Graph metadata -->
+
+<!-- Open Graph -->
 <meta property="og:title" content="Purple Woman — 0teazy">
 <meta property="og:description" content="Listen to Purple Woman — the new deep house experience by 0teazy.">
-<meta property="og:image" content="https://0teazypig.github.io/Purple-Woman/">
+<meta property="og:image" content="https://0teazypig.github.io/Purple-Woman/square-image.jpg">
 <meta property="og:url" content="https://0teazypig.github.io/Purple-Woman/">
 <meta property="og:type" content="music.album">
 <meta property="og:site_name" content="Purple Woman Player">
+
 <style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #6424b8;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow-y: auto;
-  }
-
-  .album-container {
-    max-width: 800px;
-    width: 100%;
-    padding: 40px 20px;
-    box-sizing: border-box;
-  }
-
-  .album-header {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-
-  .album-art, .player-art {
-    width: 200px;
-    height: 200px;
-    border-radius: 8px;
-    object-fit: cover;
-    display: block;
-    margin-right: 30px;
-    flex-shrink: 0;
-  }
-
-  .album-details {
-    flex: 1;
-  }
-
-  .album-title { font-size: 32px; font-weight: bold; margin: 0 0 8px; }
-  .album-artist { font-size: 24px; color: #b3b3b3; margin: 0 0 16px; }
-  .album-release { font-size: 14px; color: #8e8e8e; margin: 0; }
-
-  .track-list { list-style: none; padding: 0; margin: 0; }
-  .track-item {
-    display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #6424b8;
-    cursor: pointer; transition: background-color 0.2s, box-shadow 0.3s;
-  }
-  .track-item:hover { background-color: #1c1c1e; border-radius: 6px; }
-  .track-item.active { background-color: #ffef3a; border-radius: 6px; color: #000; }
-
-  .track-number { width: 40px; text-align: right; color: #8e8e8e; margin-right: 20px; }
-  .track-title { flex: 1; font-size: 16px; }
-  .track-duration { color: #8e8e8e; font-size: 14px; margin-left: 20px; }
-
- .global-player {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ffef3a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 12px;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-  z-index: 1000;
-  color: #000;
-}
-
-/* Player layout */
-.player-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.player-art {
-  width: 42px;
-  height: 42px;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.player-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.player-title {
-  font-size: 13px;
-  margin: 0;
-  font-weight: 600;
-}
-
-.player-artist {
-  font-size: 11px;
-  margin: 0;
-  color: #4b4b4b;
-}
-
-.player-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.player-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
-}
-
-.player-button:hover {
-  transform: scale(1.1);
-}
-
-/* Compact on mobile */
-@media (max-width: 600px) {
-  .global-player {
-    padding: 4px 8px;
-  }
-
-  .player-art {
-    width: 38px;
-    height: 38px;
-  }
-
-  .player-title {
-    font-size: 12px;
-  }
-
-  .player-artist {
-    font-size: 10px;
-  }
-
-  .player-controls svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#6424b8;color:#fff;margin:0;padding:0;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow-y:auto}
+  .hidden{display:none}
+  .album-container{max-width:800px;width:100%;padding:40px 20px;box-sizing:border-box}
+  .album-header{display:flex;align-items:flex-start;margin-bottom:40px}
+  .album-art,.player-art{width:200px;height:200px;border-radius:8px;object-fit:cover;display:block;margin-right:30px;flex-shrink:0}
+  .album-details{flex:1}
+  .album-title{font-size:32px;font-weight:700;margin:0 0 8px}
+  .album-artist{font-size:24px;color:#b3b3b3;margin:0 0 16px}
+  .album-release{font-size:14px;color:#8e8e8e;margin:0}
+  .track-list{list-style:none;padding:0;margin:0}
+  .track-item{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #6424b8;cursor:pointer;transition:background-color .2s,box-shadow .3s}
+  .track-item:hover{background:#1c1c1e;border-radius:6px}
+  .track-item.active{background:#ffef3a;border-radius:6px;color:#000}
+  .track-number{width:40px;text-align:right;color:#8e8e8e;margin-right:20px}
+  .track-title{flex:1;font-size:16px}
+  .track-duration{color:#8e8e8e;font-size:14px;margin-left:20px}
+  .global-player{position:fixed;bottom:0;left:0;width:100%;background:#ffef3a;display:flex;justify-content:space-between;align-items:center;padding:6px 12px;box-shadow:0 -2px 10px rgba(0,0,0,.3);z-index:1000;color:#000;flex-wrap:wrap}
+  .player-left{display:flex;align-items:center;gap:10px}
+  .player-art{width:42px;height:42px;border-radius:4px;flex-shrink:0}
+  .player-info{display:flex;flex-direction:column}
+  .player-title{font-size:13px;margin:0;font-weight:600}
+  .player-artist{font-size:11px;margin:0;color:#4b4b4b}
+  .player-controls{display:flex;align-items:center;gap:12px}
+  .player-button{background:none;border:0;cursor:pointer;color:#000;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+  .player-button:hover{transform:scale(1.08)}
+  .player-progress{width:100%;margin-top:4px}
+  .player-progress input[type=range]{width:100%;-webkit-appearance:none;height:3px;background:#000;border-radius:2px;outline:none}
+  .player-time{font-size:10px;display:flex;justify-content:space-between;width:100%;margin-top:2px}
+  @media(max-width:600px){.global-player{padding:4px 8px}.player-art{width:38px;height:38px}.player-title{font-size:12px}.player-artist{font-size:10px}.player-controls svg{width:24px;height:24px}}
 </style>
 </head>
 <body>
-
-<div class="album-container">
-  <div class="album-header">
-    <img src="square-image.jpg" alt="Album Art" class="album-art">
-    <div class="album-details">
-      <h1 class="album-title">Purple Woman</h1>
-      <h2 class="album-artist">0teazy</h2>
-      <p class="album-release">Released: ? • Deep Afro House • 4...</p>
+  <div class="album-container">
+    <div class="album-header">
+      <img src="square-image.jpg" alt="Album Art" class="album-art">
+      <div class="album-details">
+        <h1 class="album-title">Purple Woman</h1>
+        <h2 class="album-artist">0teazy</h2>
+        <p class="album-release">Released: ? • Deep Afro House • Full Album</p>
+      </div>
     </div>
+
+    <ul class="track-list" id="trackList">
+      <!-- Replace data-src names to match your MP3 filenames (they must be available in the same folder on GitHub Pages) -->
+      <li class="track-item" data-src="isixhosa chants.mp3" data-title="God" data-artist="0teazy"><span class="track-number">1</span><span class="track-title">God</span><span class="track-duration">3:29</span></li>
+      <li class="track-item" data-src="Robot Summer.mp3" data-title="Robot Summer" data-artist="0teazy"><span class="track-number">2</span><span class="track-title">Robot Summer</span><span class="track-duration">2:59</span></li>
+      <li class="track-item" data-src="Flower.mp3" data-title="Flower" data-artist="0teazy"><span class="track-number">3</span><span class="track-title">Flower</span><span class="track-duration">2:54</span></li>
+      <li class="track-item" data-src="Brush My Hair.mp3" data-title="Brush My Hair" data-artist="0teazy"><span class="track-number">4</span><span class="track-title">Brush My Hair</span><span class="track-duration">2:29</span></li>
+      <!-- Add more <li> for all album tracks (keep the same data-* attributes) -->
+    </ul>
   </div>
 
-  <ul class="track-list">
-    <li class="track-item" data-src="isixhosa chants.mp3" data-title="God" data-artist="0teazy">
-      <span class="track-number">1</span><span class="track-title">God</span><span class="track-duration">3:29</span>
-    </li>
-    <li class="track-item" data-src="Robot Summer.mp3" data-title="Robot Summer" data-artist="0teazy">
-      <span class="track-number">2</span><span class="track-title">Robot Summer</span><span class="track-duration">2:59</span>
-    </li>
-    <li class="track-item" data-src="Flower.mp3" data-title="Flower" data-artist="0teazy">
-      <span class="track-number">3</span><span class="track-title">Flower</span><span class="track-duration">2:54</span>
-    </li>
-    <li class="track-item" data-src="Brush My Hair.mp3" data-title="Brush My Hair" data-artist="0teazy">
-      <span class="track-number">4</span><span class="track-title">Brush My Hair</span><span class="track-duration">2:29</span>
-    </li>
-  </ul>
-</div>
-
-<div class="global-player hidden">
-  <div class="player-left">
-    <img src="square-image.jpg" alt="Playing Art" class="player-art">
-    <div class="player-info">
-      <p class="player-title"></p>
-      <p class="player-artist"></p>
+  <div class="global-player hidden" id="globalPlayer">
+    <div class="player-left">
+      <img src="square-image.jpg" alt="Playing Art" class="player-art" id="playerArt">
+      <div class="player-info">
+        <p class="player-title" id="playerTitle"></p>
+        <p class="player-artist" id="playerArtist"></p>
+      </div>
     </div>
+
+    <div class="player-controls">
+      <button class="player-button prev" id="prevBtn" aria-label="Previous Track">
+        <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="16,18 8,12 16,6" fill="currentColor"/></svg>
+      </button>
+
+      <button class="player-button play-pause" id="playPauseBtn" aria-label="Play/Pause">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+          <polygon class="icon-play" points="8,5 8,19 19,12"/>
+          <g class="icon-pause" style="display:none;">
+            <rect x="6" y="5" width="4" height="14"/>
+            <rect x="14" y="5" width="4" height="14"/>
+          </g>
+        </svg>
+      </button>
+
+      <button class="player-button next" id="nextBtn" aria-label="Next Track">
+        <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="8,6 16,12 8,18" fill="currentColor"/></svg>
+      </button>
+    </div>
+
+    <div class="player-progress">
+      <input type="range" id="seekBar" value="0" min="0" max="100">
+      <div class="player-time"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
+    </div>
+
+    <!-- Fallback audio element for older browsers / accessibility (hidden visually, used if Web Audio not available) -->
+    <audio id="audioFallback" class="hidden" preload="metadata" controlslist="nodownload"></audio>
   </div>
-
-  <div class="player-controls">
-    <button class="player-button prev" aria-label="Previous Track">
-      <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="16,18 8,12 16,6" fill="currentColor"/></svg>
-    </button>
-
-    <button class="player-button play-pause" aria-label="Play/Pause">
-  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-    <polygon class="icon-play" points="8,5 8,19 19,12"/>
-    <g class="icon-pause" style="display:none;">
-      <rect x="6" y="5" width="4" height="14"/>
-      <rect x="14" y="5" width="4" height="14"/>
-    </g>
-  </svg>
-</button>
-
-    <button class="player-button next" aria-label="Next Track">
-      <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="8,6 16,12 8,18" fill="currentColor"/></svg>
-    </button>
-  </div>
-
-  <audio id="audio-player"></audio>
-</div>
-
 
 <script>
-const trackItems = document.querySelectorAll('.track-item');
-const globalPlayer = document.querySelector('.global-player');
-const audio = document.getElementById('audio-player');
-const playerTitle = document.querySelector('.player-title');
-const playerArtist = document.querySelector('.player-artist');
-const playerArt = document.querySelector('.player-art');
-const playPauseBtn = document.querySelector('.play-pause');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
-const progressBar = document.querySelector('.progress-bar');
-const progress = document.querySelector('.progress');
+/*
+  Crossfade + MediaSession player
+  - Uses Web Audio API for crossfades (2s default)
+  - Falls back to <audio> element if Web Audio not supported
+  - Updates Media Session metadata for lock screen controls & display
+*/
 
-let currentTrackIndex = -1;
-const tracks = Array.from(trackItems);
+const CROSSFADE = 2.0; // seconds crossfade duration (adjustable)
+const trackItems = Array.from(document.querySelectorAll('.track-item'));
+const globalPlayer = document.getElementById('globalPlayer');
+const playerTitle = document.getElementById('playerTitle');
+const playerArtist = document.getElementById('playerArtist');
+const playerArt = document.getElementById('playerArt');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const seekBar = document.getElementById('seekBar');
+const currentTimeEl = document.getElementById('currentTime');
+const totalTimeEl = document.getElementById('totalTime');
+const audioFallback = document.getElementById('audioFallback');
 
-function loadTrack(index) {
-  if (!tracks[index]) return;
-  currentTrackIndex = index;
-  tracks.forEach(t => t.classList.remove('active'));
-  const track = tracks[index];
-  track.classList.add('active');
+let currentIndex = -1;
+let audioCtx = null;
+let masterGain = null;
+let activeSources = []; // up to two sources for crossfade
+let isPlaying = false;
+let periodicUpdateTimer = null;
 
-  audio.src = track.dataset.src;
-  playerTitle.textContent = track.dataset.title;
-  playerArtist.textContent = track.dataset.artist;
-  playerArt.src = "square-image.jpg";
+// Utility
+function formatTime(s){
+  if (!s || !isFinite(s)) return '0:00';
+  const m = Math.floor(s/60), sec = Math.floor(s % 60);
+  return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+}
 
-  globalPlayer.classList.remove('hidden');
+function setActiveTrackClass(idx){
+  trackItems.forEach((t,i)=>t.classList.toggle('active', i===idx));
+}
 
-  // Media session for lock screen & notifications
-  function updateMediaSession(track) {
-    if (!('mediaSession' in navigator)) return;
+// Initialize Media Session metadata
+function updateMediaSessionMeta(track){
+  if (!('mediaSession' in navigator)) return;
+  const art = track.dataset.art || 'square-image.jpg';
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: track.dataset.title,
+    artist: track.dataset.artist,
+    album: 'Purple Woman',
+    artwork: [
+      { src: art, sizes: '512x512', type: 'image/jpeg' },
+      { src: art, sizes: '192x192', type: 'image/jpeg' }
+    ]
+  });
+}
 
-    navigator.mediaSession.metadata = new MediaMetadata({
-        title: track.dataset.title,
-        artist: track.dataset.artist,
-        album: 'Purple Woman',
-        artwork: [
-            { src: 'Purple-Woman.jpg', sizes: '96x96',   type: 'image/jpeg' },
-            { src: 'square-image.jpg', sizes: '128x128', type: 'image/jpeg' },
-            { src: 'square-image.jpg', sizes: '192x192', type: 'image/jpeg' },
-            { src: 'square-image.jpg', sizes: '256x256', type: 'image/jpeg' },
-            { src: 'square-image.jpg', sizes: '384x384', type: 'image/jpeg' },
-            { src: 'square-image.jpg', sizes: '512x512', type: 'image/jpeg' }
-        ]
+// Media Session action handlers
+function setupMediaSessionHandlers(){
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.setActionHandler('play', async () => { await resume(); });
+  navigator.mediaSession.setActionHandler('pause', () => { pause(); });
+  navigator.mediaSession.setActionHandler('previoustrack', () => { prev(); });
+  navigator.mediaSession.setActionHandler('nexttrack', () => { next(); });
+}
+
+// Create AudioContext + master gain
+function initAudioContext(){
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 1;
+  masterGain.connect(audioCtx.destination);
+}
+
+// Create and play buffer with optional fade-in/out and linking to onended
+async function playBufferWithCrossfade(buffer, whenStart = 0, fadeIn = CROSSFADE, id = null){
+  const src = audioCtx.createBufferSource();
+  src.buffer = buffer;
+  const gain = audioCtx.createGain();
+  gain.gain.value = 0.0001; // start near 0 for ramp
+  src.connect(gain);
+  gain.connect(masterGain);
+
+  const startTime = whenStart || audioCtx.currentTime;
+  // fade in
+  gain.gain.setValueAtTime(0.0001, startTime);
+  gain.gain.exponentialRampToValueAtTime(1.0, startTime + fadeIn);
+
+  src.start(startTime);
+  src._startTime = startTime;
+  src._gainNode = gain;
+  src._id = id;
+
+  // wire ended handler
+  src.onended = () => {
+    // remove from activeSources
+    activeSources = activeSources.filter(s => s !== src);
+    // if no active sources playing and there's a buffer, attempt to handle end
+    if (activeSources.length === 0){
+      // when natural end occurs, if we haven't scheduled next already, autoplay next
+      if (currentIndex < trackItems.length - 1) {
+        // small timeout to avoid immediate overlap scheduling
+        setTimeout(()=>{ loadTrack(currentIndex + 1); }, 40);
+      } else {
+        // finished album
+        isPlaying = false;
+        togglePlayIcon(false);
+        stopPeriodicUpdates();
+      }
+    }
+  };
+
+  activeSources.push(src);
+  return src;
+}
+
+// Fade out a source over `fade` seconds and stop
+function fadeOutAndStopSrc(src, fade = CROSSFADE){
+  if (!src || !src._gainNode) return;
+  const g = src._gainNode.gain;
+  const now = audioCtx.currentTime;
+  g.cancelScheduledValues(now);
+  g.setValueAtTime(g.value, now);
+  g.exponentialRampToValueAtTime(0.0001, now + fade);
+  try {
+    // schedule stop after fade
+    src.stop(now + fade + 0.05);
+  } catch (e) { /* ignore if already stopped */ }
+}
+
+// Fetch + decode a track (returns AudioBuffer)
+async function fetchAndDecode(url){
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Failed to load: ' + url);
+  const ab = await response.arrayBuffer();
+  return await audioCtx.decodeAudioData(ab);
+}
+
+// Primary loader: handles crossfade between current and next track
+async function loadTrack(index){
+  if (index < 0 || index >= trackItems.length) return;
+  // ensure user gesture started audio context on mobile — if not, resume later on first play
+  initAudioContext();
+
+  const nextTrack = trackItems[index];
+  const srcUrl = nextTrack.dataset.src;
+
+  // If Web Audio unsupported, fallback
+  if (!audioCtx || !audioCtx.decodeAudioData){
+    return fallbackLoad(index);
+  }
+
+  try {
+    // mark UI
+    currentIndex = index;
+    setActiveTrackClass(index);
+    playerTitle.textContent = nextTrack.dataset.title;
+    playerArtist.textContent = nextTrack.dataset.artist;
+    playerArt.src = nextTrack.dataset.art || 'square-image.jpg';
+    globalPlayer.classList.remove('hidden');
+    updateMediaSessionMeta(nextTrack);
+    setupMediaSessionHandlers();
+
+    // decode buffer
+    const buffer = await fetchAndDecode(srcUrl);
+
+    // schedule crossfade: if something playing, fade out old and overlap
+    const now = audioCtx.currentTime;
+    if (activeSources.length > 0){
+      // start new buffer slightly before the outgoing ends to create overlap
+      // We'll start new at now + small offset
+      const newStart = now + 0.05;
+      // play new buffer with fade-in of CROSSFADE
+      const newSrc = await playBufferWithCrossfade(buffer, newStart, CROSSFADE, index);
+
+      // fade out existing sources over CROSSFADE seconds
+      activeSources.slice().forEach(old => {
+        if (old !== newSrc) fadeOutAndStopSrc(old, CROSSFADE);
+      });
+
+      // set total track time based on buffer
+      totalTimeEl.textContent = formatTime(buffer.duration);
+      startPeriodicUpdates(buffer.duration, newStart, newSrc);
+    } else {
+      // nothing playing: start immediately (no need to crossfade)
+      const newSrc = await playBufferWithCrossfade(buffer, now + 0.05, Math.min(0.5, CROSSFADE), index);
+      totalTimeEl.textContent = formatTime(buffer.duration);
+      startPeriodicUpdates(buffer.duration, now + 0.05, newSrc);
+    }
+
+    isPlaying = true;
+    togglePlayIcon(true);
+
+  } catch (err){
+    console.error('Playback error', err);
+    // fallback on failure
+    fallbackLoad(index);
+  }
+}
+
+// Fallback strategy: use <audio> element (less smooth, but reliable)
+function fallbackLoad(index){
+  const t = trackItems[index];
+  if (!t) return;
+  currentIndex = index;
+  setActiveTrackClass(index);
+  playerTitle.textContent = t.dataset.title;
+  playerArtist.textContent = t.dataset.artist;
+  playerArt.src = t.dataset.art || 'square-image.jpg';
+  audioFallback.src = t.dataset.src;
+  audioFallback.play().then(()=> {
+    isPlaying = true;
+    globalPlayer.classList.remove('hidden');
+    updateMediaSessionMeta(t);
+    setupMediaSessionHandlers();
+    togglePlayIcon(true);
+    totalTimeEl.textContent = formatTime(audioFallback.duration);
+    // update UI with time updates
+    if (!periodicUpdateTimer) periodicUpdateTimer = setInterval(()=> {
+      seekBar.value = (audioFallback.currentTime / audioFallback.duration) * 100 || 0;
+      currentTimeEl.textContent = formatTime(audioFallback.currentTime);
+    }, 300);
+  }).catch(e=>console.log('Fallback play prevented',e));
+}
+
+// Periodic UI updates for WebAudio scheduled source
+function startPeriodicUpdates(bufferDuration, startWhen, src){
+  stopPeriodicUpdates();
+  // compute startTime and duration
+  const startTime = src._startTime || startWhen || audioCtx.currentTime;
+  const duration = bufferDuration;
+  totalTimeEl.textContent = formatTime(duration);
+
+  periodicUpdateTimer = setInterval(()=> {
+    const now = audioCtx.currentTime;
+    const elapsed = Math.max(0, now - startTime);
+    if (elapsed >= duration - 0.05){
+      // will soon end — allow onended to handle next track
+      seekBar.value = 100;
+      currentTimeEl.textContent = formatTime(duration);
+    } else {
+      seekBar.value = (elapsed / duration) * 100 || 0;
+      currentTimeEl.textContent = formatTime(elapsed);
+    }
+  }, 250);
+}
+
+function stopPeriodicUpdates(){
+  if (periodicUpdateTimer){ clearInterval(periodicUpdateTimer); periodicUpdateTimer = null; }
+}
+
+// Play / Pause / Resume handlers
+async function resume(){
+  if (!audioCtx) initAudioContext();
+  if (audioCtx && audioCtx.state === 'suspended'){
+    try { await audioCtx.resume(); } catch(e){ console.warn(e); }
+  }
+  if (!isPlaying){
+    if (currentIndex === -1) {
+      await loadTrack(0);
+    } else {
+      // If using fallback audio
+      if (audioFallback && !audioFallback.paused){
+        await audioFallback.play();
+      } else if (activeSources.length === 0) {
+        await loadTrack(currentIndex);
+      } else {
+        // nothing to do: audio is playing via WebAudio
+      }
+      isPlaying = true;
+      togglePlayIcon(true);
+    }
+  }
+}
+
+function pause(){
+  // pause WebAudio by suspending context (preserves position roughly)
+  if (audioCtx && audioCtx.state === 'running'){
+    audioCtx.suspend().then(()=> {
+      isPlaying = false;
+      togglePlayIcon(false);
     });
-
-    navigator.mediaSession.setActionHandler('play', () => { audio.play(); togglePlayIcon(true); });
-    navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); togglePlayIcon(false); });
-    navigator.mediaSession.setActionHandler('previoustrack', () => { if(currentTrackIndex>0) loadTrack(currentTrackIndex-1); });
-    navigator.mediaSession.setActionHandler('nexttrack', () => { if(currentTrackIndex<tracks.length-1) loadTrack(currentTrackIndex+1); });
+  } else if (audioFallback && !audioFallback.paused){
+    audioFallback.pause();
+    isPlaying = false;
+    togglePlayIcon(false);
+  }
 }
 
-
-  audio.load();
-  audio.play().catch(err => console.log('Autoplay prevented', err));
-  playPauseBtn.innerHTML = '&#9208;';
+// Next / Prev
+function next(){
+  if (currentIndex < trackItems.length - 1){
+    loadTrack(currentIndex + 1);
+  } else {
+    // optional: loop to start
+    loadTrack(0);
+  }
+}
+function prev(){
+  if (currentIndex > 0){
+    loadTrack(currentIndex - 1);
+  } else {
+    loadTrack(0);
+  }
 }
 
-// Track clicks
-trackItems.forEach((item,index)=>item.addEventListener('click',()=>{
-  if(currentTrackIndex===index && !audio.paused){ audio.pause(); playPauseBtn.innerHTML='&#9654;'; }
-  else loadTrack(index);
-}));
+// Toggle play icon
+function togglePlayIcon(play){
+  const playIcon = playPauseBtn.querySelector('.icon-play');
+  const pauseIcon = playPauseBtn.querySelector('.icon-pause');
+  playIcon.style.display = play ? 'none' : 'block';
+  pauseIcon.style.display = play ? 'block' : 'none';
+}
 
-// Play/Pause
-playPauseBtn.addEventListener('click',()=>{
-  if(audio.paused){ audio.play(); playPauseBtn.innerHTML='&#9208;'; }
-  else { audio.pause(); playPauseBtn.innerHTML='&#9654;'; }
+// Seek support (fallback only)
+seekBar.addEventListener('input', async (e) => {
+  const pct = Number(seekBar.value) / 100;
+  // for fallback audio element, change currentTime
+  if (audioFallback && audioFallback.duration){
+    audioFallback.currentTime = pct * audioFallback.duration;
+  } else {
+    // For WebAudio buffer-based playback, seeking is more complex: implement simple restart from pct
+    // We'll restart the track from the requested position
+    if (currentIndex >= 0 && audioCtx){
+      // Stop and restart current track from position
+      // Fetch & decode current buffer, then start playback from offset
+      try {
+        const t = trackItems[currentIndex];
+        const buffer = await fetchAndDecode(t.dataset.src);
+        // Stop and remove all active sources
+        activeSources.slice().forEach(s => { try { s.stop(); } catch(e){} });
+        activeSources = [];
+        const offset = pct * buffer.duration;
+        // Start new source with immediate gain ramp
+        const src = audioCtx.createBufferSource();
+        src.buffer = buffer;
+        const g = audioCtx.createGain();
+        g.gain.value = 1;
+        src.connect(g); g.connect(masterGain);
+        const now = audioCtx.currentTime + 0.05;
+        src.start(now, offset);
+        src._startTime = now - offset;
+        activeSources.push(src);
+        totalTimeEl.textContent = formatTime(buffer.duration);
+        startPeriodicUpdates(buffer.duration, now - offset, src);
+      } catch (err){ console.error('Seek error', err); }
+    }
+  }
 });
 
-// Prev/Next
-prevBtn.addEventListener('click',()=>{ if(currentTrackIndex>0) loadTrack(currentTrackIndex-1); });
-nextBtn.addEventListener('click',()=>{ if(currentTrackIndex<tracks.length-1) loadTrack(currentTrackIndex+1); });
+// Wire UI buttons
+playPauseBtn.addEventListener('click', async () => {
+  if (!isPlaying){
+    await resume();
+  } else {
+    pause();
+  }
+});
+prevBtn.addEventListener('click', () => { prev(); });
+nextBtn.addEventListener('click', () => { next(); });
 
-// Progress bar
-audio.addEventListener('timeupdate',()=>{ if(audio.duration) progress.style.width=(audio.currentTime/audio.duration*100)+'%'; });
-progressBar.addEventListener('click',(e)=>{ const rect=progressBar.getBoundingClientRect(); audio.currentTime=(e.clientX-rect.left)/rect.width*audio.duration; });
-audio.addEventListener('ended',()=>{ if(currentTrackIndex<tracks.length-1) loadTrack(currentTrackIndex+1); else playPauseBtn.innerHTML='&#9654;'; });
+// Track click
+trackItems.forEach((el, idx) => {
+  el.addEventListener('click', async () => {
+    // ensure audio context started on user gesture
+    if (!audioCtx){
+      try { initAudioContext(); await audioCtx.resume(); } catch(e){}
+    }
+    // If same track and playing -> pause
+    if (currentIndex === idx && isPlaying){
+      pause();
+      return;
+    }
+    loadTrack(idx);
+  });
+});
+
+// Fallback audio element events (if used)
+audioFallback.addEventListener('loadedmetadata', () => {
+  totalTimeEl.textContent = formatTime(audioFallback.duration);
+});
+audioFallback.addEventListener('timeupdate', () => {
+  currentTimeEl.textContent = formatTime(audioFallback.currentTime);
+  seekBar.value = (audioFallback.currentTime / audioFallback.duration) * 100 || 0;
+});
+audioFallback.addEventListener('ended', () => {
+  isPlaying = false;
+  togglePlayIcon(false);
+  if (currentIndex < trackItems.length - 1) loadTrack(currentIndex + 1);
+});
+
+// Try to initialize Media Session handlers right away
+setupMediaSessionHandlers();
+
+// Helpful: expose some functions to the global scope for debugging if needed
+window._PW = { loadTrack, next, prev, resume, pause };
+
 </script>
 </body>
 </html>
