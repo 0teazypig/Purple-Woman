@@ -61,62 +61,98 @@
   .track-title { flex: 1; font-size: 16px; }
   .track-duration { color: #8e8e8e; font-size: 14px; margin-left: 20px; }
 
-  .global-player {
-    position: fixed; 
-    bottom: 0; 
-    left: 0; 
-    width: 100%; 
-    background-color: #ffef3a;
-    padding: 10px 0px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.3); z-index: 1000; color: #000;
-  }
-  .player-art {
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    margin-right: 0px;
+ .global-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffef3a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  color: #000;
 }
 
-  .player-info { text-align: center; margin-bottom: 8px; }
-  .player-title { font-size: 14px; margin: 0 0 2px; }
-  .player-artist { font-size: 12px; margin: 0; color: #8e8e8e; }
+/* Player layout */
+.player-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; }
-  .player-button {
-    background-color: rgba(255,255,255,0.1); border: none; border-radius: 50%;
-    padding: 10px; cursor: pointer; display: flex; justify-content: center; align-items: center;
-    transition: background-color 0.2s, transform 0.2s; color: #000;
+.player-art {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-title {
+  font-size: 13px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.player-artist {
+  font-size: 11px;
+  margin: 0;
+  color: #4b4b4b;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.player-button:hover {
+  transform: scale(1.1);
+}
+
+/* Compact on mobile */
+@media (max-width: 600px) {
+  .global-player {
+    padding: 4px 8px;
   }
-  .player-button:hover { background-color: rgba(255,255,255,0.2); transform: scale(1.1); }
 
-  .progress-bar {
-    width: 100%; height: 4px; background-color: #6424b8; border-radius: 2px;
-    margin: 5px 0; position: relative; cursor: pointer;
-  }
-  .progress { height: 100%; background-color: #ffef3a; border-radius: 2px; width: 0; }
-
-  .hidden { display: none; }
-  .album-container {
-    max-width: 800px;
-    width: 100%;
-    padding: 40px 20px 120px 20px; /* extra bottom padding for the player */
-    box-sizing: border-box;
+  .player-art {
+    width: 38px;
+    height: 38px;
   }
 
-
-  @media (max-width:600px){
-    .album-header { flex-direction: column; align-items: center; text-align: center; }
-    .album-art { width: 150px; height: 150px; margin-right: 0; margin-bottom: 15px; }
-    .album-title { font-size: 24px; }
-    .album-artist { font-size: 18px; }
-    .track-number { width: 30px; margin-right: 10px; }
-    .track-title { font-size: 14px; }
-    .track-duration { font-size: 12px; margin-left: 10px; }
-    .player-art { width: 50px; height: 50px; margin-bottom: 5px; }
+  .player-title {
+    font-size: 12px;
   }
+
+  .player-artist {
+    font-size: 10px;
+  }
+
+  .player-controls svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -148,35 +184,37 @@
 </div>
 
 <div class="global-player hidden">
-  <img src="square-image.jpg" alt="Playing Art" class="player-art">
-  <div class="player-info">
-    <p class="player-title"></p>
-    <p class="player-artist"></p>
+  <div class="player-left">
+    <img src="square-image.jpg" alt="Playing Art" class="player-art">
+    <div class="player-info">
+      <p class="player-title"></p>
+      <p class="player-artist"></p>
+    </div>
   </div>
-  <div class="progress-bar"><div class="progress"></div></div>
+
   <div class="player-controls">
     <button class="player-button prev" aria-label="Previous Track">
-      <svg viewBox="0 0 24 24" width="28" height="28"><polygon points="16,18 8,12 16,6" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="16,18 8,12 16,6" fill="currentColor"/></svg>
     </button>
-    <!-- Play/Pause Button -->
-<button class="player-button play-pause" aria-label="Play/Pause">
-    <svg viewBox="0 0 24 24" width="36" height="36">
-        <!-- Play Icon -->
+
+    <button class="player-button play-pause" aria-label="Play/Pause">
+      <svg viewBox="0 0 24 24" width="28" height="28">
         <polygon class="icon-play" points="8,5 8,19 19,12" fill="currentColor"/>
-        <!-- Pause Icon -->
         <g class="icon-pause" style="display:none;">
-            <rect x="6" y="5" width="4" height="14" fill="currentColor"/>
-            <rect x="14" y="5" width="4" height="14" fill="currentColor"/>
+          <rect x="6" y="5" width="4" height="14" fill="currentColor"/>
+          <rect x="14" y="5" width="4" height="14" fill="currentColor"/>
         </g>
-    </svg>
-</button>
+      </svg>
+    </button>
 
     <button class="player-button next" aria-label="Next Track">
-      <svg viewBox="0 0 24 24" width="28" height="28"><polygon points="8,6 16,12 8,18" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="8,6 16,12 8,18" fill="currentColor"/></svg>
     </button>
   </div>
+
   <audio id="audio-player"></audio>
 </div>
+
 
 <script>
 const trackItems = document.querySelectorAll('.track-item');
@@ -209,18 +247,29 @@ function loadTrack(index) {
   globalPlayer.classList.remove('hidden');
 
   // Media session for lock screen & notifications
-  if ('mediaSession' in navigator) {
+  function updateMediaSession(track) {
+    if (!('mediaSession' in navigator)) return;
+
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: track.dataset.title,
-      artist: track.dataset.artist,
-      album: 'Purple Woman',
-      artwork: [{ src: 'square-image.jpg', sizes: '512x512', type: 'image/jpeg' }]
+        title: track.dataset.title,
+        artist: track.dataset.artist,
+        album: 'Purple Woman',
+        artwork: [
+            { src: 'Purple-Woman.jpg', sizes: '96x96',   type: 'image/jpeg' },
+            { src: 'square-image.jpg', sizes: '128x128', type: 'image/jpeg' },
+            { src: 'square-image.jpg', sizes: '192x192', type: 'image/jpeg' },
+            { src: 'square-image.jpg', sizes: '256x256', type: 'image/jpeg' },
+            { src: 'square-image.jpg', sizes: '384x384', type: 'image/jpeg' },
+            { src: 'square-image.jpg', sizes: '512x512', type: 'image/jpeg' }
+        ]
     });
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', () => { if (currentTrackIndex>0) loadTrack(currentTrackIndex-1); });
-    navigator.mediaSession.setActionHandler('nexttrack', () => { if (currentTrackIndex<tracks.length-1) loadTrack(currentTrackIndex+1); });
-  }
+
+    navigator.mediaSession.setActionHandler('play', () => { audio.play(); togglePlayIcon(true); });
+    navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); togglePlayIcon(false); });
+    navigator.mediaSession.setActionHandler('previoustrack', () => { if(currentTrackIndex>0) loadTrack(currentTrackIndex-1); });
+    navigator.mediaSession.setActionHandler('nexttrack', () => { if(currentTrackIndex<tracks.length-1) loadTrack(currentTrackIndex+1); });
+}
+
 
   audio.load();
   audio.play().catch(err => console.log('Autoplay prevented', err));
