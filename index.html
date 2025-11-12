@@ -146,22 +146,38 @@
             margin: 0;
         }
 
-        .player-controls {
-            display: flex;
-            align-items: center;
-            
-        }
+ .player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #000000;
+}
 
         .player-button {
-            background: none;
-            border: none;
-            color: #8e8e8e;
-            font-size: 24px;
-            margin: 0 10px;
-            cursor: pointer;
-        }
-        
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, transform 0.2s;
+    color: #000000;
+}
+.player-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
 
+.player-button svg path {
+    fill: #000000;
+}
+
+.play-pause svg path.pause {
+    display: none;
+}
         .progress-bar {
             width: 200px;
             height: 4px;
@@ -182,6 +198,71 @@
         .hidden {
             display: none;
         }
+        /* Mobile responsiveness */
+@media (max-width: 600px) {
+    .album-container {
+        padding: 20px 10px;
+    }
+
+    .album-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .album-art {
+        width: 150px;
+        height: 150px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .album-title {
+        font-size: 24px;
+    }
+
+    .album-artist {
+        font-size: 18px;
+    }
+
+    .track-number {
+        width: 30px;
+        margin-right: 10px;
+    }
+
+    .track-title {
+        font-size: 14px;
+        
+    }
+
+    .track-duration {
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .global-player {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .player-art {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 8px;
+    }
+
+    .player-controls {
+        margin-top: 5px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
     </style>
 </head>
 
@@ -192,7 +273,7 @@
             <div class="album-details">
                 <h1 class="album-title">Purple Woman</h1>
                 <h2 class="album-artist">0teazy</h2>
-                <p class="album-release">Released: ? • Afro + House • [Track Count]</p>
+                <p class="album-release">Released: ? • Deep Afro House • 4...</p>
             </div>
         </div>
 
@@ -233,10 +314,29 @@
             <div class="progress"></div>
         </div>
         <div class="player-controls">
-            <button class="player-button prev">&#9194;</button>
-            <button class="player-button play-pause">&#9654;</button>
-            <button class="player-button next">&#9197;</button>
-        </div>
+    <!-- Previous Track -->
+    <button class="player-button prev" aria-label="Previous Track">
+        <svg viewBox="0 0 24 24" width="28" height="28">
+            <polygon points="16,18 8,12 16,6" fill="currentColor"/>
+        </svg>
+    </button>
+
+    <!-- Play/Pause -->
+    <button class="player-button play-pause" aria-label="Play/Pause">
+        <svg viewBox="0 0 24 24" width="36" height="36">
+            <path d="M8 5v14l11-7z" fill="currentColor"/>
+        </svg>
+    </button>
+
+    <!-- Next Track -->
+    <button class="player-button next" aria-label="Next Track">
+        <svg viewBox="0 0 24 24" width="28" height="28">
+            <polygon points="8,6 16,12 8,18" fill="currentColor"/>
+        </svg>
+    </button>
+</div>
+
+
         <audio id="audio-player"></audio>
     </div>
 
@@ -321,6 +421,42 @@
                 playPauseBtn.innerHTML = '&#9654;';
             }
         });
+        if ('mediaSession' in navigator) {
+    function updateMediaSession(track) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: track.dataset.title,
+            artist: track.dataset.artist,
+            album: 'Purple Woman',
+            artwork: [
+                { src: 'Purple Woman.jpg', sizes: '512x512', type: 'image/jpeg' }
+            ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => { audio.play(); playPauseBtn.innerHTML = '&#9208;'; });
+        navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); playPauseBtn.innerHTML = '&#9654;'; });
+        navigator.mediaSession.setActionHandler('previoustrack', () => { if (currentTrackIndex > 0) loadTrack(currentTrackIndex - 1); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { if (currentTrackIndex < tracks.length - 1) loadTrack(currentTrackIndex + 1); });
+    }
+
+    // Call this whenever a track loads
+    function loadTrack(index) {
+        tracks.forEach(item => item.classList.remove('active'));
+        const track = tracks[index];
+        currentTrackIndex = index;
+        track.classList.add('active');
+        audio.src = track.dataset.src;
+        playerTitle.textContent = track.dataset.title;
+        playerArtist.textContent = track.dataset.artist;
+        playerArt.src = "Purple Woman.jpg";
+        globalPlayer.classList.remove('hidden');
+        audio.load();
+        audio.play().catch(err => console.log(err));
+        playPauseBtn.innerHTML = '&#9208;';
+        
+        updateMediaSession(track); // Update media session metadata
+    }
+}
+
     </script>
 </body>
 
